@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.grade.GradeMapper">
+    <select id="findAll" resultType="Grade">
+        SELECT * from grade
+        ORDER BY id
+    </select>
+    <select id="findGradeByID" resultType="Grade">
+        SELECT * from grade
+        where id = #{gradeID}
+    </select>
+    <delete id="delGradeByID" parameterType="integer">
+        DELETE FROM grade where id=#{id}
+    </delete>
+    <delete id="delGradeByIDs" parameterType="list">
+        DELETE FROM grade
+        where id IN
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <insert id="addGrade" parameterType="Grade" keyProperty="id" useGeneratedKeys="true">
+        insert into grade(grade_name, create_date, details)
+        values(#{grade_name},now(),#{details});
+    </insert>
+    <update id="updateGrade" parameterType="Grade">
+        UPDATE grade
+        set details = #{details}
+        where id=#{id}
+    </update>
+</mapper>
