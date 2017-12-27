@@ -34,7 +34,7 @@
         $("li>a").click(function () {
             var title = $(this).text();
             var url = $(this).attr("url");
-            var content = "<iframe frameborder='0' src='"+url+"'></iframe>";
+            var content = "<iframe frameborder='0' src='"+url+"' style='width: 100%;height: 100%;'></iframe>";
             if($("#tabs").tabs("exists",title)){
                 $("#tabs").tabs("select",title);
             }else{
