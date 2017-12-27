@@ -19,6 +19,7 @@
             <ul>
                 <li><a href="#" url="/hobby/toHobby">爱好管理</a></li>
                 <li><a href="#" url="/score/toScore">成绩管理</a></li>
+                <li><a href="#" url="/jsondemo/toJsondemo">jsonDemo</a></li>
             </ul>
         </div>
         <div region="center">
@@ -34,7 +35,7 @@
         $("li>a").click(function () {
             var title = $(this).text();
             var url = $(this).attr("url");
-            var content = "<iframe frameborder='0' src='"+url+"'></iframe>";
+            var content = "<iframe frameborder='0' src='"+url+"' style='width: 100%;height: 100%;'></iframe>";
             if($("#tabs").tabs("exists",title)){
                 $("#tabs").tabs("select",title);
             }else{
