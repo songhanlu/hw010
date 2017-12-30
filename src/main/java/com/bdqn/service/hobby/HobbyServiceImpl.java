@@ -23,4 +23,9 @@ public class HobbyServiceImpl implements HobbyService {
         PageInfo<Hobby> pageInfo = new PageInfo<>(hobbies);
         return pageInfo;
     }
+
+    @Override
+    public Integer add(Hobby hobby) {
+        return hobbyMapper.add(hobby);
+    }
 }

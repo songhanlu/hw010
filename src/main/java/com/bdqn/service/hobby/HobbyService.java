@@ -8,4 +8,6 @@ import com.github.pagehelper.PageInfo;
  */
 public interface HobbyService {
     PageInfo<Hobby> findAllByPage(Integer pageNum, Integer pageSizse);
+
+    Integer add(Hobby hobby);
 }
