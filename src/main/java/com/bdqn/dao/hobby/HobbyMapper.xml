@@ -6,4 +6,8 @@
     <select id="findAll" resultType="Hobby">
         select * from hobby order by create_time desc
     </select>
+    <insert id="add" parameterType="Hobby">
+        insert into hobby (hobby_name, create_time)
+        VALUES (#{hobby_name},NOW())
+    </insert>
 </mapper>
