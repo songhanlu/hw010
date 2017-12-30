@@ -12,7 +12,7 @@
     <jsp:include page="easyUI/common.jsp"/>
 </head>
 <body>
-    <div class="easyui-window" style="width: 400px;height:300px;">
+    <div class="easyui-window" style="width: 400px;height:300px;top: 100px;">
         <form action="/user/login" method="post">
             <table align="center" width="300px">
                 <tr>

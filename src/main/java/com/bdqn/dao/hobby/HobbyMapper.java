@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface HobbyMapper {
     List<Hobby> findAll();
+    Integer addHobby(Hobby hobby);
 }

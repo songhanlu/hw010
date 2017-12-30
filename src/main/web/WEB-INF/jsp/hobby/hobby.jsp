@@ -10,23 +10,90 @@
 <head>
     <title>Title</title>
     <jsp:include page="../easyUI/common.jsp"/>
+    <script type="text/javascript">
+        $(function () {
+            $("#hobbyDatagrid").datagrid({
+                url:"${pageContext.request.contextPath}/hobby/findAllByPage",
+                method:"get",
+                pagination:true,
+                rownumbers:true,
+                pageSize:5,
+                pageList:[5,8,12],
+                striped:true,
+                onLoadSuccess:function () {
+                    $("button").linkbutton();
+                    $('#hobbyDatagrid').datagrid('fixRowHeight');
+                },
+                toolbar:[
+                    {
+                        text:"添加新爱好",
+                        iconCls:"icon-add",
+                        handler:function () {
+                            $("#addHobbyWindow").window("open");
+
+                        }
+                    },
+                ],
+                columns:[[
+                    {field:"hobby_name",title:"爱好名称",width:100},
+                    {field:"create_time",title:"创建时间",width:150,formatter:function (value,row,index) {
+                        var date = new Date(value);
+                        var yyyy = date.getFullYear();
+                        var MM = date.getMonth()+1;
+                        var dd = date.getDay();
+                        var HH = date.getHours();
+                        var mm = date.getMinutes();
+                        var ss = date.getSeconds();
+                        return yyyy+"年"+MM+"月"+dd+"日 "+HH+":"+mm+":"+ss;
+
+                    }},
+                    {field:"id",title:"操作",width:250,formatter:function (value,row,index) {
+                        return "<button onclick='hobbyDetail("+value+")'>详情</button>  " +
+                            "<button onclick='hobbyUpdate("+value+")'>修改</button>  " +
+                            "<button onclick='hobbyDelete("+value+")'>删除</button>";
+                    }},
+                ]]
+            });
+        });
+
+
+    </script>
 </head>
 <body>
-    <div id="hobbyDatagrid"></div>
+    <table id="hobbyDatagrid"></table>
+    <%--<button class="easyui-linkbutton">aa</button>--%>
+    <div id="addHobbyWindow" title="添加新爱好" class="easyui-window" style="width: 500px;height: 300px;padding-left: 30px;" closed="true">
+        <form id="addHobbyForm">
+            <label>爱好名称：</label>
+            <input type="text" class="easyui-textbox" name="hobby_name"/>
+        </form>
+        <button id="addHobbyButton" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</button>
+    </div>
+
 <script type="text/javascript">
     $(function () {
-        $("#hobbyDatagrid").datagrid({
-            url:"${pageContext.request.contextPath}/hobby/findAllByPage",
-            method:"get",
-            pagination:true,
-            rownumbers:true,
-            pageSize:5,
-            pageList:[5,8,12],
-            striped:true,
-            columns:[[
-                {field:"hobby_name",title:"爱好名称",width:100},
-                {field:"create_time",title:"创建时间",width:100},
-            ]]
+
+    });
+    function hobbyDetail(id) {
+        alert("详情："+id);
+    }
+    function hobbyUpdate(id) {
+        alert("修改："+id);
+    }
+    function hobbyDelete(id) {
+        alert("删除："+id);
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#addHobbyButton").click(function () {
+            var hobby = $("#addHobbyForm").serialize();
+            $.post("/hobby/add",hobby,function (result) {
+                alert(result.msg);
+                $("#hobbyDatagrid").datagrid("reload");
+                $("#addHobbyWindow").window("close");
+                $("#addHobbyForm").form("clear");
+            })
         });
     });
 </script>
