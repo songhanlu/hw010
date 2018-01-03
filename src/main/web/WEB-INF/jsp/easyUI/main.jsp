@@ -21,6 +21,7 @@
                 <li><a href="#" url="/score/toScore">成绩管理</a></li>
                 <li><a href="#" url="/jsondemo/toJsondemo">jsonDemo</a></li>
                 <li><a href="#" url="/test/toTest">自己的测试</a></li>
+                <li><a href="#" url="/test/toDate">日期控件的测试</a></li>
             </ul>
         </div>
         <div region="center">

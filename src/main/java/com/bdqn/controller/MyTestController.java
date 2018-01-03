@@ -13,4 +13,9 @@ public class MyTestController {
     public String toTest(){
         return "test/test";
     }
+
+    @RequestMapping("/toDate")
+    public String toDate(){
+        return "test/toDate";
+    }
 }
