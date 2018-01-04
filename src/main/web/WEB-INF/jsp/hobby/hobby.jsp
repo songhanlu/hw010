@@ -33,6 +33,13 @@
 
                         }
                     },
+                    {
+                        text:"批量删除",
+                        iconCls:"icon-remove",
+                        handler:function () {
+
+                        }
+                    },
                 ],
                 columns:[[
                     {field:"hobby_name",title:"爱好名称",width:100},
@@ -69,13 +76,34 @@
         </form>
         <button id="addHobbyButton" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</button>
     </div>
+    <%--爱好详情--%>
+    <div id="detailHobbyWindow" title="爱好详情" class="easyui-window" style="width: 500px;height: 300px;padding-left: 30px;" closed="true">
+        <form id="detailHobbyForm">
+            <label>爱好名称：</label>
+            <input type="text" class="easyui-textbox" name="hobby_name" readonly/>
+            <br/>
+            <label>创建时间：</label>
+            <input type="text" class="easyui-textbox" name="create_time" readonly/>
+        </form>
+    </div>
+    <%--修改爱好--%>
+    <div id="updateHobbyWindow" title="修改爱好" class="easyui-window" style="width: 500px;height: 300px;padding-left: 30px;" closed="true">
+        <form id="updateHobbyForm">
+            <label>爱好名称：</label>
+            <input type="text" class="easyui-textbox" name="hobby_name"/>
+            <br/>
+            <label>创建时间：</label>
+            <input type="text" class="easyui-textbox" name="create_time"/>
+        </form>
+        <button id="updateHobbyButton" class="easyui-linkbutton" data-options="{iconCls:'icon-save'}">保存</button>
+    </div>
 
 <script type="text/javascript">
     $(function () {
 
     });
     function hobbyDetail(id) {
-        alert("详情："+id);
+
     }
     function hobbyUpdate(id) {
         alert("修改："+id);
