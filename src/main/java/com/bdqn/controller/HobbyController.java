@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hp on 2017/12/26.
@@ -47,6 +49,21 @@ public class HobbyController {
     @ResponseBody
     public String add(Hobby hobby){
         int result = hobbyService.addHobby(hobby);
+        if(result>0){
+            return JSON.toJSONString(Comm.success());
+        }
+        return JSON.toJSONString(Comm.failed());
+    }
+
+    @RequestMapping(value = "/delHobbyByIDs",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
+    @ResponseBody
+    public String delHobbyByIDs(String IDs){
+        String[] ddd = IDs.split(",");
+        List<Integer> ids = new ArrayList<>();
+        for (Integer id : ids) {
+            ids.add(id);
+        }
+        int result = hobbyService.delHobbyByIDs(ids);
         if(result>0){
             return JSON.toJSONString(Comm.success());
         }
