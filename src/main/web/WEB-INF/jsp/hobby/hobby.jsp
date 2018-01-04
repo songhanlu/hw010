@@ -92,9 +92,6 @@
         <form id="updateHobbyForm">
             <label>爱好名称：</label>
             <input type="text" class="easyui-textbox" name="hobby_name"/>
-            <br/>
-            <label>创建时间：</label>
-            <input type="text" class="easyui-textbox" name="create_time"/>
             <input type="hidden" name="id"/>
         </form>
         <button id="updateHobbyButton" class="easyui-linkbutton" data-options="{iconCls:'icon-save'}">保存</button>
