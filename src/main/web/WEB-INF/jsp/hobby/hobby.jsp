@@ -42,6 +42,7 @@
                     },
                 ],
                 columns:[[
+                    {field:"",checkbox:true},
                     {field:"hobby_name",title:"爱好名称",width:100},
                     {field:"create_time",title:"创建时间",width:150,formatter:function (value,row,index) {
                         var date = new Date(value);

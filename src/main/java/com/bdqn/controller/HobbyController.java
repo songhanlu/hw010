@@ -60,8 +60,8 @@ public class HobbyController {
     public String delHobbyByIDs(String IDs){
         String[] ddd = IDs.split(",");
         List<Integer> ids = new ArrayList<>();
-        for (Integer id : ids) {
-            ids.add(id);
+        for (String id : ddd) {
+            ids.add(Integer.parseInt(id));
         }
         int result = hobbyService.delHobbyByIDs(ids);
         if(result>0){
