@@ -28,4 +28,24 @@ public class HobbyServiceImpl implements HobbyService {
     public Integer addHobby(Hobby hobby) {
         return hobbyMapper.addHobby(hobby);
     }
+
+    @Override
+    public Integer delHobbyByIDs(List<Integer> IDs) {
+        return hobbyMapper.delHobbyByIDs(IDs);
+    }
+
+    @Override
+    public Integer delHobbyByID(Integer id) {
+        return hobbyMapper.delHobbyByID(id);
+    }
+
+    @Override
+    public Hobby findHobbyByID(Integer id) {
+        return hobbyMapper.findHobbyByID(id);
+    }
+
+    @Override
+    public Integer updateHobby(Hobby hobby) {
+        return hobbyMapper.updateHobby(hobby);
+    }
 }

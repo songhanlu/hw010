@@ -10,4 +10,22 @@
         insert into hobby (hobby_name, create_time)
         VALUES (#{hobby_name},now())
     </insert>
+    <delete id="delHobbyByIDs" parameterType="list">
+        DELETE FROM hobby
+        where id IN
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="delHobbyByID" parameterType="integer">
+        DELETE FROM hobby
+        where id = #{id}
+    </delete>
+    <select id="findHobbyByID" parameterType="integer" resultType="Hobby">
+        SELECT * from hobby WHERE id = #{id}
+    </select>
+    <update id="updateHobby" parameterType="Hobby">
+        UPDATE hobby SET hobby_name = #{hobby_name}
+        where id = #{id}
+    </update>
 </mapper>

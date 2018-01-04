@@ -10,4 +10,12 @@ import java.util.List;
 public interface HobbyMapper {
     List<Hobby> findAll();
     Integer addHobby(Hobby hobby);
+
+    Integer delHobbyByIDs(List<Integer> IDs);
+
+    Integer delHobbyByID(Integer id);
+
+    Hobby findHobbyByID(Integer id);
+
+    Integer updateHobby(Hobby hobby);
 }
