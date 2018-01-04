@@ -69,4 +69,31 @@ public class HobbyController {
         }
         return JSON.toJSONString(Comm.failed());
     }
+
+    @RequestMapping(value = "/delHobbyByID",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
+    @ResponseBody
+    public String delHobbyByID(Integer id){
+        int result = hobbyService.delHobbyByID(id);
+        if(result>0){
+            return JSON.toJSONString(Comm.success());
+        }
+        return JSON.toJSONString(Comm.failed());
+    }
+
+    @RequestMapping(value = "/findHobbyByID",produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
+    @ResponseBody
+    public String findHobbyByID(Integer id){
+        Hobby hobby = hobbyService.findHobbyByID(id);
+        return JSON.toJSONString(hobby);
+    }
+
+    @RequestMapping(value = "/updateHobby", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String updateHobby(Hobby hobby) {
+        int result = hobbyService.updateHobby(hobby);
+        if(result>0){
+            return JSON.toJSONString(Comm.success());
+        }
+        return JSON.toJSONString(Comm.failed());
+    }
 }
