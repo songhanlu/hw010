@@ -42,4 +42,7 @@
           student_num=#{student_num}
         where id=#{id}
     </update>
+    <select id="findStudentsByGradeID" parameterType="integer" resultMap="studentMap">
+        SELECT * from student where student.grade_id = #{gradeID}
+    </select>
 </mapper>
