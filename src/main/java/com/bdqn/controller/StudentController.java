@@ -86,5 +86,12 @@ public class StudentController {
         return JSON.toJSONString(Comm.failed());
     }
 
+    @RequestMapping(value = "/findStudentsByGradeID", method = RequestMethod.GET,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String findStudentsByGradeID(Integer gradeID){
+        List<Student> students =studentService.findStudentsByGradeID(gradeID);
+        return JSON.toJSONString(students);
+    }
 
 }

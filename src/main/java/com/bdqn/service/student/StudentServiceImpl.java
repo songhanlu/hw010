@@ -63,5 +63,10 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.updateStudent(student);
     }
 
+    @Override
+    public List<Student> findStudentsByGradeID(Integer gradeID) {
+        return studentMapper.findStudentsByGradeID(gradeID);
+    }
+
 
 }

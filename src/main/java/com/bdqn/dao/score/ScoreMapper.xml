@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.score.ScoreMapper">
+    <resultMap id="courseMap" type="Course">
+        <id column="co_id" property="id"/>
+    </resultMap>
+    <resultMap id="gradeMap" type="Grade">
+        <id column="gr_id" property="id"/>
+    </resultMap>
+    <resultMap id="studentMap" type="Student">
+        <id column="st_id" property="id"></id>
+        <association property="grade" resultMap="gradeMap"/>
+    </resultMap>
+    <resultMap id="scoreMap" type="Score">
+        <id column="id" property="id"/>
+        <association property="course" resultMap="courseMap"/>
+        <association property="student" resultMap="studentMap"/>
+    </resultMap>
+
+    <select id="findAllScore" resultMap="scoreMap">
+        SELECT sc.*,
+        co.id as co_id, co.course_name,
+        gr.id as gr_id, gr.grade_name,
+        st.id as st_id, st.student_name
+        from score sc, course co, grade gr, student st
+        where
+        sc.student_id = st.id
+        and sc.course_id = co.id
+        and st.grade_id = gr.id
+        <if test="studentID!=null">
+            and st.id = #{studentID}
+        </if>
+        <if test="gradeID!=null">
+            and gr.id = #{gradeID}
+        </if>
+    </select>
+</mapper>
