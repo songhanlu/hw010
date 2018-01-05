@@ -6,4 +6,5 @@ package com.bdqn.pojo;
 public class Course {
     private Integer id;
     private String course_name;
+
 }
