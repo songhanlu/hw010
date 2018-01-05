@@ -37,7 +37,19 @@
                         text:"批量删除",
                         iconCls:"icon-remove",
                         handler:function () {
-
+                            var idCheck = $("#hobbyDatagrid").datagrid("getChecked");
+                            var IDs = "";
+                            if(idCheck==null || idCheck.length==0){
+                                alert("请先选择！！！");
+                                return;
+                            }
+                            $.each(idCheck,function (index, item) {
+                                IDs = IDs + item.id + ",";
+                            });
+                            $.post("/hobby/delHobbyByIDs",{"IDs":IDs},function (result) {
+                                alert(result.msg);
+                                $("#hobbyDatagrid").datagrid("reload");
+                            })
                         }
                     },
                 ],
@@ -99,16 +111,42 @@
 
 <script type="text/javascript">
     $(function () {
-
+        $("#updateHobbyButton").click(function () {
+            var hobby = $("#updateHobbyForm").serialize();
+            $.post("/hobby/updateHobby",hobby,function (result) {
+                alert(result.msg);
+                $("#hobbyDatagrid").datagrid("reload");
+                $("#updateHobbyWindow").window("close");
+            })
+        });
     });
     function hobbyDetail(id) {
-
+        $.get("/hobby/findHobbyByID",{"id":id},function (hobby) {
+            var date = new Date(hobby.create_time);
+            var yyyy = date.getFullYear();
+            var MM = date.getMonth()+1;
+            var dd = date.getDay();
+            var HH = date.getHours();
+            var mm = date.getMinutes();
+            var ss = date.getSeconds();
+            hobby.create_time = yyyy+"年"+MM+"月"+dd+"日 "+HH+":"+mm+":"+ss;
+            $("#detailHobbyForm").form("load", hobby);
+        });
+        $("#detailHobbyWindow").window("open");
     }
     function hobbyUpdate(id) {
-        alert("修改："+id);
+        $.get("/hobby/findHobbyByID",{"id":id},function (hobby) {
+            $("#updateHobbyForm").form("load", hobby);
+        });
+        $("#updateHobbyWindow").window("open");
     }
     function hobbyDelete(id) {
-        alert("删除："+id);
+        if(confirm("确定删除吗？")){
+            $.post("/hobby/delHobbyByID",{"id":id},function (result) {
+                alert(result.msg);
+                $("#hobbyDatagrid").datagrid("reload");
+            })
+        }
     }
 </script>
 <script type="text/javascript">
