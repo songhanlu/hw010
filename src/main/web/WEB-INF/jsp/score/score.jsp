@@ -9,8 +9,27 @@
 <html>
 <head>
     <title>Title</title>
+    <jsp:include page="../easyUI/common.jsp"/>
 </head>
 <body>
-    成绩管理
+    <form>
+        所属年级：<input id="gradeCombobox"/>
+        学生姓名：<input id="studentCombobox"/>
+        <a id="searchButton" class="easyui-search" data-options="{iconCls:'icon-search'}">查询</a>
+    </form>
+    <div id="scoreDataGrid"></div>
+<script type="text/javascript">
+    $(function () {
+        $("#scoreDataGrid").datagrid({
+            url:"/score/findAllScore",
+            paginagion:true,
+            striped:true,
+            pageSize:5,
+            pageList:[5,7,9],
+            method:false,
+
+        });
+    });
+</script>
 </body>
 </html>
