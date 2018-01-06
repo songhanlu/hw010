@@ -11,7 +11,7 @@
         <a id="searchButton" class="easyui-linkbutton" data-options="{iconCls:'icon-search'}">查询</a>
     </form>
     <div id="scoreDataGrid" style="width: 99%;height: 86%;"></div>
-    <div id="addScoreWindow" class="easyui-window" style="width: 300px;height: 300px;padding: 20px;" data-options="{closed:true}" title="添加成绩">
+    <div id="addScoreWindow" class="easyui-window" style="width: 300px;height: 300px;padding: 20px;top: 10px;left: 10px;" data-options="{closed:true}" title="添加成绩">
         <form id="addScoreForm">
             请选择年级：<input id="addScore_grade"/>
             <br/>
