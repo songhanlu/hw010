@@ -45,5 +45,22 @@
         insert into score (student_id, course_id, score)
         VALUES (#{student.id},#{course.id},#{score})
     </insert>
+    <delete id="deleteScoreByIDs" parameterType="list">
+        delete from score where id in
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="findScoreByID" parameterType="integer" resultMap="scoreMap">
+        select sc.*
+        st.id as st_id, st.student_name,
+        gr.id as gr_id, gr.grade_name,
+        co.id as co_id, co.course_name
+        from score sc, student st, grade gr, course co
+        where sc.course_id = co.id
+        and sc.student_id = st.id
+        and st.grade_id = gr.id
+        and sc.id = #{id}
+    </select>
 
 </mapper>

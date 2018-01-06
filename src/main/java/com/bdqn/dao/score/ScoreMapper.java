@@ -15,5 +15,8 @@ public interface ScoreMapper {
     Integer deleteScoreByID(Integer id);
     Integer addScore(Score score);
 
+    Integer deleteScoreByIDs(List<Integer> ids);
+
+    Score findScoreByID(Integer id);
 
 }

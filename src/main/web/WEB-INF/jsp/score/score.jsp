@@ -25,13 +25,13 @@
     </div>
     <div id="detailScoreWindow" class="easyui-window" style="width: 300px;height: 300px;padding: 20px;top: 10px;left: 10px;" data-options="{closed:true}" title="添加成绩">
         <form id="detailScoreForm">
-            请选择年级：<input id="detailScore_grade" class="easyui-textbox"/>
+            请选择年级：<input id="detailScore_grade" class="easyui-textbox" readonly/>
             <br/>
-            请选择学生：<input id="detailScore_student" class="easyui-textbox"/>
+            请选择学生：<input id="detailScore_student" class="easyui-textbox" readonly/>
             <br/>
-            请选择课程：<input id="detailScore_course" class="easyui-textbox"/>
+            请选择课程：<input id="detailScore_course" class="easyui-textbox" readonly/>
             <br/>
-            请输入成绩：<input id="detailScore_score" class="easyui-textbox"/>
+            请输入成绩：<input id="detailScore_score" class="easyui-textbox" readonly/>
         </form>
     </div>
 
