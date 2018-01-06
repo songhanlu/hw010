@@ -17,7 +17,7 @@
         学生姓名：<input id="studentCombobox"/>
         <a id="searchButton" class="easyui-linkbutton" data-options="{iconCls:'icon-search'}">查询</a>
     </form>
-    <div id="scoreDataGrid"></div>
+    <div id="scoreDataGrid" style="width: 99%;height: 86%;"></div>
 <script type="text/javascript">
     $(function () {
         $("#scoreDataGrid").datagrid({
@@ -55,6 +55,9 @@
                 {field:"grade",title:"所属年级",formatter:function (value,row,index) {
                     return row.student.grade.grade_name;
                 }},
+                {field:"course",title:"课程名称",width:150,formatter:function (value,row,index) {
+                    return value.course_name;
+                }},
                 {field:"score",title:"分数"},
                 {field:"id",title:"操作",formatter:function (value, row, index) {
                     return "<button onclick='scoreDetial("+value+")'>详情</button>"+
@@ -75,6 +78,9 @@
                 textField:"grade_name",
                 data:grades,
                 editable:false,
+                onLoadSuccess:function () {
+                    $("#gradeCombobox").combobox("select",-1);
+                },
                 onSelect:function (grade) {
                     var gradeID = grade.id;
                     $.get("/student/findStudentsByGradeID",{"gradeID":gradeID},function (students) {
@@ -85,12 +91,15 @@
                             textField:"student_name",
                             data:students,
                             editable:false,
+                            onLoadSuccess:function () {
+                                $("#studentCombobox").combobox("select",-1);
+                            }
                         });
-                        $("#studentCombobox").combobox("select",-1);
+
                     });
                 }
             });
-            $("#gradeCombobox").combobox("select",-1);
+
         });
     });
 </script>
