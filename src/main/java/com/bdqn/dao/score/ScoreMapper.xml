@@ -52,7 +52,7 @@
         </foreach>
     </delete>
     <select id="findScoreByID" parameterType="integer" resultMap="scoreMap">
-        select sc.*
+        select sc.*,
         st.id as st_id, st.student_name,
         gr.id as gr_id, gr.grade_name,
         co.id as co_id, co.course_name
