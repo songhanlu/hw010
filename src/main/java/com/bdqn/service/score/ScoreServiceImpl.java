@@ -34,14 +34,5 @@ public class ScoreServiceImpl implements ScoreService {
         return scoreMapper.addScore(score);
     }
 
-    @Override
-    public Integer deleteScoreByIDs(String ids) {
-        String[] dd = ids.split(",");
-        List<Integer> i = new ArrayList<>();
-        for (String s : dd) {
-            i.add(Integer.parseInt(s));
-        }
-        int result = scoreMapper.deleteScoreByIDs(i);
-        return result;
-    }
+
 }

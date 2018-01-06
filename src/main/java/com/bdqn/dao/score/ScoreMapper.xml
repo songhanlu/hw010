@@ -45,11 +45,5 @@
         insert into score (student_id, course_id, score)
         VALUES (#{student.id},#{course.id},#{score})
     </insert>
-    <delete id="deleteScoreByIDs" parameterType="list">
-        DELETE from score
-        where id in
-        <foreach collection="list" open="(" separator="," close=")" item="id">
-            #{id}
-        </foreach>
-    </delete>
+
 </mapper>

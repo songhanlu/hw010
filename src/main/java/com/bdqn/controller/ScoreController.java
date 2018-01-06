@@ -76,14 +76,4 @@ public class ScoreController {
         return JSON.toJSONString(Comm.failed());
     }
 
-    @RequestMapping(value = "/deleteScoreByIDs",method = RequestMethod.POST,
-                    produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public String deleteScoreByIDs(String IDs){
-        int result = scoreService.deleteScoreByIDs(IDs);
-        if(result>0){
-            return JSON.toJSONString(Comm.success());
-        }
-        return JSON.toJSONString(Comm.failed());
-    }
 }

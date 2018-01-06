@@ -23,18 +23,7 @@
         </form>
         <button id="addScoreButton" class="easyui-linkbutton" data-options="{iconCls:'icon-save'}">保存</button>
     </div>
-    <div id="detailScoreWindow" class="easyui-window" style="width: 300px;height: 300px;padding: 20px;" data-options="{closed:true}" title="添加成绩">
-        <form id="detailScoreForm">
-            请选择年级：<input id="detailScore_grade"/>
-            <br/>
-            请选择学生：<input id="detailScore_student" name="student.id"/>
-            <br/>
-            请选择课程：<input id="detailScore_course" name="course.id"/>
-            <br/>
-            请输入成绩：<input name="score" type="number" class="easyui-textbox"/>
-        </form>
 
-    </div>
 <script type="text/javascript">
     $(function () {
         $("#scoreDataGrid").datagrid({
@@ -102,22 +91,7 @@
                     text:"批量删除",
                     iconCls:"icon-remove",
                     handler:function () {
-                        var scoresChecked = $("#scoreDataGrid").datagrid("getChecked");
-                        var IDs = "";
-                        if(scoresChecked==null || scoresChecked.length==0){
-                            alert("请选择！");
-                            return;
-                        }
-                        if(confirm("确定删除？")){
-                            $.each(scoresChecked,function (index, item) {
-                                IDs = IDs + item.id + ",";
-                            });
-                            $.post("/score/deleteScoreByIDs",{"IDs":IDs},function (result) {
-                                alert(result.msg);
-                                $("#scoreDataGrid").datagrid("reload");
 
-                            })
-                        }
                     }
                 },
             ],
@@ -191,12 +165,7 @@
 </script>
 <script type="text/javascript">
     function deleteScore(id) {
-        if(confirm("确定删除？")){
-            $.post("/score/deleteScore",{"id":id},function (result) {
-                alert(result.msg);
-                $("#scoreDataGrid").datagrid("reload");
-            })
-        }
+
     }
 </script>
 <script type="text/javascript">

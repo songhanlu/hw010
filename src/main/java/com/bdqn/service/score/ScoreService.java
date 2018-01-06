@@ -13,5 +13,5 @@ public interface ScoreService {
                                  Integer gradeID);
     Integer deleteScoreByID(Integer id);
     Integer addScore(Score score);
-    Integer deleteScoreByIDs(String ids);
+
 }
