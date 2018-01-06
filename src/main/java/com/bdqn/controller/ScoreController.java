@@ -76,4 +76,21 @@ public class ScoreController {
         return JSON.toJSONString(Comm.failed());
     }
 
+    @RequestMapping(value = "/deleteScoreByIDs", method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String deleteScoreByIDs(String IDs) {
+        int reuslt = scoreService.deleteScoreByIDs(IDs);
+        if(reuslt>0){
+            return JSON.toJSONString(Comm.success());
+        }
+        return JSON.toJSONString(Comm.failed());
+    }
+
+    @RequestMapping(value = "/findScoreByID", method = RequestMethod.GET,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String findScoreByID(Integer id) {
+        return JSON.toJSONString(scoreService.findScoreByID(id));
+    }
 }
