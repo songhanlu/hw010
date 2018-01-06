@@ -46,6 +46,7 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public Score findScoreByID(Integer id) {
         return scoreMapper.findScoreByID(id);
+
     }
 
 
