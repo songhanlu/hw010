@@ -11,4 +11,9 @@ import java.util.List;
 public interface ScoreMapper {
     List<Score> findAllScore(@Param("studentID") Integer studentID,
                              @Param("gradeID") Integer gradeID);
+
+    Integer deleteScoreByID(Integer id);
+    Integer addScore(Score score);
+
+    Integer deleteScoreByIDs(List<Integer> ids);
 }

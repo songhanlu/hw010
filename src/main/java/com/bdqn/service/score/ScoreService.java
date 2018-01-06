@@ -11,4 +11,7 @@ public interface ScoreService {
                                  Integer pageSize,
                                  Integer studentID,
                                  Integer gradeID);
+    Integer deleteScoreByID(Integer id);
+    Integer addScore(Score score);
+    Integer deleteScoreByIDs(String ids);
 }

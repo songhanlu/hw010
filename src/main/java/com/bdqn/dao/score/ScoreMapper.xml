@@ -35,5 +35,21 @@
         <if test="gradeID!=null">
             and gr.id = #{gradeID}
         </if>
+        order by sc.id desc
     </select>
+
+    <delete id="deleteScoreByID" parameterType="integer">
+        DELETE from score where id=#{id}
+    </delete>
+    <insert id="addScore" parameterType="Score">
+        insert into score (student_id, course_id, score)
+        VALUES (#{student.id},#{course.id},#{score})
+    </insert>
+    <delete id="deleteScoreByIDs" parameterType="list">
+        DELETE from score
+        where id in
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
