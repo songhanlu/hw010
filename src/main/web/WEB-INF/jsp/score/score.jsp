@@ -102,7 +102,21 @@
                     text:"批量删除",
                     iconCls:"icon-remove",
                     handler:function () {
-
+                        var checked = $("#scoreDataGrid").datagrid("getChecked");
+                        if(checked==null || checked.length==0){
+                            alert("请选择！");
+                            return;
+                        }
+                        if(confirm("确定删除？")){
+                            var IDs = "";
+                            $.each(checked,function (index, item) {
+                                IDs = IDs + item.id + ",";
+                            });
+                            $.post("/score/deleteScoreByIDs",{"IDs":IDs},function (result) {
+                                alert(result.msg);
+                                $("#scoreDataGrid").datagrid("reload");
+                            });
+                        }
                     }
                 },
             ],
@@ -175,8 +189,24 @@
     });
 </script>
 <script type="text/javascript">
-    function deleteScore(id) {
 
+    function deleteScore(id) {
+        var IDs = id + ",";
+        if(confirm("确定删除？")){
+            $.post("/score/deleteScoreByIDs",{"IDs":IDs},function (result) {
+                alert(result.msg);
+                $("#scoreDataGrid").datagrid("reload");
+            });
+        }
+    }
+    function detailScore(id) {
+        $.get("/score/findScoreByID",{"id":id},function (score) {
+            $("#detailScore_grade").textbox("setValue", score.student.grade.grade_name);
+            $("#detailScore_student").textbox("setValue", score.student.student_name);
+            $("#detailScore_course").textbox("setValue", score.course.course_name);
+            $("#detailScore_score").textbox("setValue", score.score);
+            $("#detailScoreWindow").window("open");
+        });
     }
 </script>
 <script type="text/javascript">
