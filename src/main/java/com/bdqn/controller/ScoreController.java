@@ -93,4 +93,15 @@ public class ScoreController {
     public String findScoreByID(Integer id) {
         return JSON.toJSONString(scoreService.findScoreByID(id));
     }
+
+    @RequestMapping(value = "/updateScore", method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String updateScore(Score score) {
+        int result = scoreService.updateScore(score);
+        if(result>0){
+            return JSON.toJSONString(Comm.success());
+        }
+        return JSON.toJSONString(Comm.failed());
+    }
 }
