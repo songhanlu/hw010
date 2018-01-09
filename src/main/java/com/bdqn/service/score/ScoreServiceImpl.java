@@ -49,5 +49,10 @@ public class ScoreServiceImpl implements ScoreService {
 
     }
 
+    @Override
+    public Integer updateScore(Score score) {
+        return scoreMapper.updateScore(score);
+    }
+
 
 }
