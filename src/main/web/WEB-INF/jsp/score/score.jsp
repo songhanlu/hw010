@@ -42,49 +42,7 @@
                     text:"新添成绩",
                     iconCls:"icon-add",
                     handler:function () {
-                        $.get("/student/findAllGrade",function(grades){
-                            var gfo = $.parseJSON('{"id":-1,"grade_name":"==请选择=="}');
-                            grades.push(gfo);
-                            $("#addScore_grade").combobox({
-                                editable:false,
-                                valueField:"id",
-                                textField:"grade_name",
-                                data:grades,
-                                onLoadSuccess:function(){
-                                    $(this).combobox("select",-1);
-                                },
-                                onSelect:function(grade){
-                                    var gradeID = grade.id;
-                                    $.get("/student/findStudentsByGradeID",{"gradeID":gradeID},function(students){
-                                        var sfo = $.parseJSON('{"id":-1,"student_name":"==请选择=="}');
-                                        students.push(sfo);
-                                        $("#addScore_student").combobox({
-                                            editable:false,
-                                            valueField:"id",
-                                            textField:"student_name",
-                                            data:students,
-                                            onLoadSuccess:function(){
-                                                $(this).combobox("select",-1);
-                                            },
-                                        });
-                                    });
-                                }
-                            });
-                        });
-                        $.get("/score/findAllCourse",function(courses){
-                            var cfo = $.parseJSON('{"id":-1,"course_name":"==请选择=="}');
-                            courses.push(cfo);
-                            $("#addScore_course").combobox({
-                                editable:false,
-                                valueField:"id",
-                                textField:"course_name",
-                                data:courses,
-                                onLoadSuccess:function(){
-                                    $(this).combobox("select",-1);
-                                },
-                            });
-                        });
-                        $("#addScoreWindow").window("open");
+
                     }
                 },
                 {
