@@ -16,4 +16,6 @@ public interface ScoreService {
     Integer deleteScoreByIDs(String ids);
 
     Score findScoreByID(Integer id);
+
+    Integer updateScore(Score score);
 }

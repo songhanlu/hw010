@@ -62,5 +62,10 @@
         and st.grade_id = gr.id
         and sc.id = #{id}
     </select>
+    <update id="updateScore" parameterType="Score">
+        UPDATE score
+        set score = #{score}
+        where id = #{id}
+    </update>
 
 </mapper>
