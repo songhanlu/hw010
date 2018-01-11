@@ -24,6 +24,31 @@
         </form>
     </div>
 
+    <div id="addScoreWindow" class="easyui-window" style="width: 300px;height: 300px;padding: 20px;top: 10px;left: 10px;" data-options="{closed:true}" title="添加成绩">
+        <form id="addScoreForm">
+            请选择年级：<input id="addScore_grade"/>
+            <br/>
+            请选择学生：<input id="addScore_student" name="student.id"/>
+            <br/>
+            请选择课程：<input id="addScore_course" name="course.id"/>
+            <br/>
+            请输入成绩：<input id="addScore_score" name="score"/>
+        </form>
+        <button id="addScoreButton" class="easyui-linkbutton" data-options="{iconCls:'icon-save'}">保存</button>
+    </div>
+
+    <div id="updateScoreWindow" class="easyui-window" style="width: 300px;height: 300px;padding: 20px;top: 10px;left: 10px;" data-options="{closed:true}" title="添加成绩">
+        <form id="updateScoreForm">
+            学生：<input id="updateScore_student" name="student.id" readonly/>
+            <input name="id" type="hidden"/>
+            <br/>
+            课程：<input id="updateScore_course" name="course.id" readonly/>
+            <br/>
+            成绩：<input id="updateScore_score" name="score" class="easyui-numberbox"/>
+        </form>
+        <button id="updateScoreButton" class="easyui-linkbutton" data-options="{iconCls:'icon-save'}">保存</button>
+    </div>
+
 <script type="text/javascript">
     $(function () {
         $("#scoreDataGrid").datagrid({
@@ -42,7 +67,50 @@
                     text:"新添成绩",
                     iconCls:"icon-add",
                     handler:function () {
-
+                        $("#addScoreForm").form("clear");
+                        $.get("/student/findAllGrade",function (grades) {
+                            var gfo = $.parseJSON('{"id":-1,"grade_name":"==请选择=="}');
+                            grades.push(gfo);
+                            $("#addScore_grade").combobox({
+                                valueField:"id",
+                                textField:"grade_name",
+                                editable:false,
+                                data:grades,
+                                onLoadSuccess:function () {
+                                    $(this).combobox("select", -1);
+                                },
+                                onSelect:function (grade) {
+                                    var gradeID = grade.id;
+                                    $.get("/student/findStudentsByGradeID",{"gradeID":gradeID},function (students) {
+                                        var sfo = $.parseJSON('{"id":-1,"student_name":"==请选择=="}');
+                                        students.push(sfo);
+                                        $("#addScore_student").combobox({
+                                            valueField:"id",
+                                            textField:"student_name",
+                                            editable:false,
+                                            data:students,
+                                            onLoadSuccess:function () {
+                                                $(this).combobox("select", -1);
+                                            },
+                                        });
+                                    });
+                                }
+                            });
+                        });
+                        $.get("/score/findAllCourse",function (courses) {
+                            var cfo = $.parseJSON('{"id":-1,"course_name":"==请选择=="}');
+                            courses.push(cfo);
+                            $("#addScore_course").combobox({
+                                valueField:"id",
+                                textField:"course_name",
+                                editable:false,
+                                data:courses,
+                                onLoadSuccess:function () {
+                                    $(this).combobox("select", -1);
+                                },
+                            });
+                        });
+                        $("#addScoreWindow").window("open");
                     }
                 },
                 {
@@ -136,7 +204,41 @@
     });
 </script>
 <script type="text/javascript">
-
+    function updateScore(id) {
+        $.get("/score/findScoreByID",{"id":id},function (score) {
+            $("#updateScore_score").numberbox("setValue", score.score);
+            $("#updateScore_course").combobox({
+                valueField:"id",
+                textField:"course_name",
+                editable:false,
+                data:[
+                    {
+                        id:score.course.id,
+                        course_name:score.course.course_name,
+                    }
+                ],
+                onLoadSuccess:function () {
+                    $(this).combobox("select",score.course.id);
+                }
+            });
+            $("#updateScore_student").combobox({
+                valueField:"id",
+                textField:"student_name",
+                editable:false,
+                data:[
+                    {
+                        id:score.student.id,
+                        student_name:score.student.student_name,
+                    }
+                ],
+                onLoadSuccess:function () {
+                    $(this).combobox("select",score.student.id);
+                }
+            });
+            $("input[name=id]").val(score.id);
+        });
+        $("#updateScoreWindow").window("open");
+    }
     function deleteScore(id) {
         var IDs = id + ",";
         if(confirm("确定删除？")){
@@ -165,6 +267,15 @@
                 $("#scoreDataGrid").datagrid("reload");
                 $("#addScoreWindow").window("close");
                 $("#addScoreForm").form("clear");
+            })
+        });
+        $("#updateScoreButton").click(function () {
+            var score = $("#updateScoreForm").serialize();
+            $.post("/score/updateScore",score,function (result) {
+                alert(result.msg);
+                $("#scoreDataGrid").datagrid("reload");
+                $("#updateScoreWindow").window("close");
+                $("#updateScoreForm").form("clear");
             })
         });
     });
