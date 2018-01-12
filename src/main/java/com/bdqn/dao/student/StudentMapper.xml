@@ -45,4 +45,7 @@
     <select id="findStudentsByGradeID" parameterType="integer" resultMap="studentMap">
         SELECT * from student where student.grade_id = #{gradeID}
     </select>
+    <delete id="deleteStudentsByGradeID" parameterType="integer">
+        DELETE FROM student where grade_id = #{gradeID}
+    </delete>
 </mapper>

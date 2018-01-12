@@ -1,5 +1,6 @@
 package com.bdqn.service.student;
 
+import com.bdqn.dao.grade.GradeMapper;
 import com.bdqn.dao.student.StudentMapper;
 import com.bdqn.dao.studentNum.StudentNumMapper;
 import com.bdqn.pojo.Grade;
@@ -21,6 +22,8 @@ public class StudentServiceImpl implements StudentService {
     private StudentMapper studentMapper;
     @Resource
     private StudentNumMapper studentNumMapper;
+    @Resource
+    private GradeMapper gradeMapper;
 
 
     @Override
@@ -66,6 +69,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findStudentsByGradeID(Integer gradeID) {
         return studentMapper.findStudentsByGradeID(gradeID);
+    }
+
+    @Override
+    public Integer deleteStudentAndGrade(Integer gradeID) {
+        studentMapper.deleteStudentsByGradeID(gradeID);
+        int a = 10/0;
+        return gradeMapper.delGradeByID(gradeID);
     }
 
 

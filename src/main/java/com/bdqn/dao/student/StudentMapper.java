@@ -18,4 +18,6 @@ public interface StudentMapper {
     Integer updateStudent(Student student);
 
     List<Student> findStudentsByGradeID(Integer gradeID);
+
+    Integer deleteStudentsByGradeID(Integer gradeID);
 }

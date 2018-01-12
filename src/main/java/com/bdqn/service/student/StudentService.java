@@ -18,4 +18,6 @@ public interface StudentService {
     Integer updateStudent(Student student);
 
     List<Student> findStudentsByGradeID(Integer gradeID);
+
+    Integer deleteStudentAndGrade(Integer gradeID);
 }
