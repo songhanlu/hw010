@@ -15,6 +15,11 @@ import javax.annotation.Resource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class StudentServiceImplTest {
+    @Test
+    public void deleteStudentAndGrade() throws Exception {
+        studentService.deleteStudentAndGrade(1);
+    }
+
     @Resource
     private StudentService studentService;
     @Test
